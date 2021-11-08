@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import IPage from '../interfaces/page';
-
+import logging from '../config/logging'
 
 const DashboardPage: React.FunctionComponent<IPage> = props => {
     useEffect(() => {
