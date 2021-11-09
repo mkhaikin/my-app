@@ -5,7 +5,8 @@ import {AccessState, AccessActionTypes, AccessAction} from "../../interfaces/acc
 const initialState: AccessState = {
     access: null,
     loading: false,
-    error: null
+    error: null,
+    isAuthenticated: false,
 }
 
 export const accessReducer = (state = initialState, action: AccessAction): AccessState =>{
@@ -13,16 +14,16 @@ export const accessReducer = (state = initialState, action: AccessAction): Acces
         case AccessActionTypes.FETCH_ACCESS:
             return {...state, loading: true}
         case AccessActionTypes.FETCH_ACCESS_SUCCESS:
-            return {...state, loading: false, access: action.payload}
+            return {...state, loading: false, access: action.payload, isAuthenticated: true}
         case AccessActionTypes.FETCH_ACCESS_ERROR:
-            return {...state, loading: false, error: action.payload}  
+            return {...state, loading: false, error: action.payload, isAuthenticated: false}  
 
         case AccessActionTypes.LOG_OUT:
             return {...state, loading: true}
         case AccessActionTypes.LOG_OUT_SUCCESS:
-            return {...state, loading: false, access: null}
+            return {...state, loading: false, access: null, isAuthenticated: false}
         case AccessActionTypes.LOG_OUT_ERROR:
-            return {...state, loading: false, error: action.payload}           
+            return {...state, loading: false, error: action.payload, isAuthenticated: false}           
                    
         default:
             return state

@@ -4,6 +4,7 @@ export interface AccessState {
     access: null | AuthResponse;
     loading: boolean;
     error: null | string;
+    isAuthenticated: boolean;
 }
 
 export enum AccessActionTypes{
