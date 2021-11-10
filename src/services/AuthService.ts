@@ -11,7 +11,7 @@ export default class AuthService {
       
         const postresp = await $api.post<AuthResponse>('/login', {email, password})        
 
-        console.log("postresp: " + postresp.data.user.positionid);
+        console.log("postresp: " + postresp.data.user.position);
 
         return postresp
     }
@@ -20,7 +20,7 @@ export default class AuthService {
 
         console.log("login start post.... Testing");
      
-        return  { user: {email: 'me@abcd.com', workid: '10', positionid: 'Admin'}     }
+        return  { user: {email: 'me@abcd.com', workid: '10', position: 'Admin'}     }
     }
 
 
