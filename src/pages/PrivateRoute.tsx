@@ -1,15 +1,16 @@
 import { ROLE } from '../interfaces/role';
-import { useSelector } from 'react-redux';
 import { Navigate, Route, useLocation } from 'react-router-dom';
 import {useTypesSelector} from "../hooks/menuTypesSelector";
+import NotFoundPage from './Notfound';
 
-interface Props {
-  element: React.ReactElement;
-  requiredRoles: Array<ROLE>;
-  path?: string;
-}
-
-const PrivateElement: React.FC<Props> = ({ element, requiredRoles }) => {
+export const PrivateRoute = ({
+  children,
+  roles,
+} : {
+  children: JSX.Element;
+  roles: Array<ROLE>
+}) => {
+  console.log("!!!!!!!! PrivateRoute !!!!!!!!!!!!!!!")
   let location = useLocation();
   const {access, loading, error, isAuthenticated } = useTypesSelector(state=> state.access)
   
@@ -17,22 +18,20 @@ const PrivateElement: React.FC<Props> = ({ element, requiredRoles }) => {
 
   let position:string = access?.user.position || ''
  
-  const userHasRequiredRole = (Object.values(requiredRoles) as string[]).includes(position);
+  const userHasRequiredRole = (Object.values(roles) as string[]).includes(position);
 
   //const userHasRequiredRole = requiredRoles.includes(access.user.position);
+  console.log("Position: " + position)
 
-  return isAuthenticated && userHasRequiredRole ? ( element) : 
-                ( <Navigate to="/login" state={{ from: location }} /> );
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
+
+  if (isAuthenticated && !userHasRequiredRole) {
+    return <NotFoundPage />; // build your own access denied page (sth like 404)
+    
+  }
+
+  return children;
 };
 
-export const PrivateRoute: React.FC<Props> = ({
-  element,
-  requiredRoles,
-  ...rest
-}) => {
-  return (
-    <Route {...rest} element={ <PrivateElement element={element} requiredRoles={requiredRoles} /> } />
-  );
-};
-
-export default PrivateElement;

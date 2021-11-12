@@ -18,7 +18,7 @@ export default class AuthService {
 
     static async logintest(email: string, password: string){
 
-        console.log("login start post.... Testing");
+        console.log("login start post.... Testing: " + email + ", " + password);
      
         return  { user: {email: 'me@abcd.com', workid: '10', position: 'Admin'}     }
     }

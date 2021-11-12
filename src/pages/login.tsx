@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
 import {useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {login} from '../store/action_creators/accesscall'
 import IPage from '../interfaces/page';
 import logging from '../config/logging'
 
 const LoginPage: React.FunctionComponent<IPage> = props => {
+    const dispatch = useDispatch()
     const history = useNavigate()
     const handleLogin = () => {
         props.setIsAuth(true)
-        history('/dashboard')
+        
+
+        dispatch(login('me@abcd.com', '12345'))
+        history('/admin-dashboard')
     }
 
     useEffect(() => {
