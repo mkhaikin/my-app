@@ -19,8 +19,12 @@ export default class AuthService {
     static async logintest(email: string, password: string){
 
         console.log("login start post.... Testing: " + email + ", " + password);
-     
-        return  { user: {email: 'me@abcd.com', workid: '10', position: 'Admin'}     }
+        if(email === 'me@abcd.com' && password === '12345')     
+            return  { user: {email: 'me@abcd.com', workid: '10', position: 'Admin'}     }
+        else if(email === 'uer1@abcd.com' && password === '54321')  
+            return  { user: {email: 'uer1@abcd.com', workid: '20', position: 'User'}     }
+        else
+            return  { user: {email: '', workid: '', position: 'n/a'}     }
     }
 
 

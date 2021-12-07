@@ -24,7 +24,7 @@ export const PrivateRoute = ({
   console.log("Position: " + position)
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/home" state={{ from: location }} />;
   }
 
   if (isAuthenticated && !userHasRequiredRole) {
