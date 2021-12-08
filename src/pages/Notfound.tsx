@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink as Link } from 'react-router-dom';
-import IPage from '../interfaces/page';
 import logging from '../config/logging'
 
 const NotFoundPage: React.FunctionComponent = props => {
-    useEffect(() => {
-        logging.info(`Loading Not Found Page}`)
-    }, [])
+
     return (
         <div>
             <h2>This is the NotFound page!</h2>

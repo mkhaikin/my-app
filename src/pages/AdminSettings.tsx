@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
-import IPage from '../interfaces/page';
 import logging from '../config/logging'
 
 const AdminSettingsPage: React.FunctionComponent = props => {

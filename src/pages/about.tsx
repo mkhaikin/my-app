@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
-import IPage from '../interfaces/page';
+import React from 'react';
 import logging from '../config/logging'
 
-const AboutPage: React.FunctionComponent<IPage> = props => {
-    useEffect(() => {
-        logging.info(`Loading ${props.name}`)
-    }, [])
+const AboutPage: React.FunctionComponent = props => {
+
     return <p>This is the About page!</p>
 }
 

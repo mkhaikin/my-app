@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
-import IPage from '../interfaces/page';
 import logging from '../config/logging'
 
-const ActivitiesPage: React.FunctionComponent<IPage> = props => {
-    useEffect(() => {
-        logging.info(`Loading ${props.name}`)
-    }, [])
+const ActivitiesPage: React.FunctionComponent = props => {
 
     return (
         <div>

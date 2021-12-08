@@ -13,6 +13,7 @@ import ProjectPage from './pages/Project';
 import ActivitiesPage from './pages/Activities';
 import AdminSettingsPage from './pages/AdminSettings'
 import AdminPasswordsPage from './pages/AdminPasswords'
+import MenagerDashboardPage from './pages/MenagerDashboard'
 
 import {PrivateRoute} from './pages/PrivateRoute';
 import { ROLE } from './interfaces/role';
@@ -44,16 +45,15 @@ const Application: React.FunctionComponent<{}> = props => {
             </nav>
             <div className="main">
                 <Routes>
-                    <Route path="/" element ={ <Home name= 'Home' setIsAuth = {setAuth} />}/>
-                    <Route path="/create-account" element={<CreateAccountPage name= 'CreateAccount' setIsAuth = {setAuth}/>} />
-                    <Route path="/about" element={<AboutPage name= 'About' setIsAuth = {setAuth}/>} />
-                    <Route path="login" element ={ <Login name= 'Login' setIsAuth = {setAuth} />}/>
+                    <Route path="/" element ={ <Home />} />
+                    <Route path="/create-account" element={<CreateAccountPage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="login" element ={ <Login />}/>
                     <Route path="admin-dashboard/*" 
                         element={
                             <PrivateRoute roles={[ROLE.Admin]}>
                                 <AdminDashboardPage />
                             </PrivateRoute>
-
                         } 
                     >
                         <Route path="settings" 
@@ -70,22 +70,42 @@ const Application: React.FunctionComponent<{}> = props => {
                                 </PrivateRoute>
                             }
                         />
-
-                        <Route path="projects" element={<ProjectsPage name= 'Projects' setIsAuth = {setAuth}/>} >
-                            <Route path=":project_id" element={<ProjectPage name= 'Project' setIsAuth = {setAuth}/>} >
-                                <Route path="activities" element={<ActivitiesPage name= 'Activities' setIsAuth = {setAuth}/>} /> 
-                            </Route>
-                        </Route>
-                                                  
                     </Route> 
+
+                    <Route path="menager-dashboard/*" 
+                        element={
+                            <PrivateRoute roles={[ROLE.Menager]}>
+                                <MenagerDashboardPage />
+                            </PrivateRoute>
+                        } 
+                    >
+                        <Route path="projects" 
+                            element={
+                                <PrivateRoute roles={[ROLE.Menager]}>
+                                    <ProjectsPage /> 
+                                </PrivateRoute>
+                            }
+                        />
+                    </Route>
+
 
                     <Route path="user-dashboard" 
                         element={
                             <PrivateRoute roles={[ROLE.User]}>
-                                <UserDashboardPage name= 'User Dashboar' setIsAuth = {setAuth}/>
+                                <UserDashboardPage />
                             </PrivateRoute>
                         }                        
-                    />
+                    >
+                        <Route path=":project_id" 
+                            element={
+                                <PrivateRoute roles={[ROLE.Menager, ROLE.User]}>
+                                    <ProjectPage /> 
+                                </PrivateRoute>
+                            }
+                        >
+                            <Route path="activities" element={<ActivitiesPage />} /> 
+                        </Route>    
+                    </Route>
 
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {login} from '../store/action_creators/accesscall'
@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 
-const LoginPage: React.FunctionComponent<IPage> = props => {
+const LoginPage: React.FunctionComponent = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -30,16 +30,12 @@ const LoginPage: React.FunctionComponent<IPage> = props => {
         const email = target.email.value; // typechecks!
         const password = target.password.value; // typechecks!
         //////////////////////
-        props.setIsAuth(true)        
+            
 
         dispatch(login('me@abcd.com', '12345'))
-        history('/admin-dashboard')
+        //history('/admin-dashboard')
         ///////////////////////
     }
-
-    useEffect(() => {
-        logging.info(`Loading ${props.name} with authentication = ${props.setIsAuth}`)
-    }, [])
 
     return (
         <div>

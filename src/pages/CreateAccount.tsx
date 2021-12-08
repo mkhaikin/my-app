@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useNavigate } from 'react-router-dom';
-import IPage from '../interfaces/page';
 import logging from '../config/logging'
 
-const CreateAccountPage: React.FunctionComponent<IPage> = props => {
+const CreateAccountPage: React.FunctionComponent = props => {
     const history = useNavigate()
     const handleLogin = () => {
        
         history('/login')
     }
 
-    useEffect(() => {
-        logging.info(`Loading ${props.name} with authentication = ${props.setIsAuth}`)
-    }, [])
-
+    
     return (
         <div>
             <p>This is the CreateAccount page!</p>

@@ -1,5 +1,5 @@
 import { ROLE } from '../interfaces/role';
-import { Navigate, Route, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import {useTypesSelector} from "../hooks/menuTypesSelector";
 import NotFoundPage from './Notfound';
 

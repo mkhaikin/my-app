@@ -21,8 +21,10 @@ export default class AuthService {
         console.log("login start post.... Testing: " + email + ", " + password);
         if(email === 'me@abcd.com' && password === '12345')     
             return  { user: {email: 'me@abcd.com', workid: '10', position: 'Admin'}     }
-        else if(email === 'uer1@abcd.com' && password === '54321')  
-            return  { user: {email: 'uer1@abcd.com', workid: '20', position: 'User'}     }
+        else if(email === 'mngr@abcd.com' && password === '24680')  
+            return  { user: {email: 'mngr@abcd.com', workid: '11', position: 'Menager'}     }
+        else if(email === 'user1@abcd.com' && password === '54321')  
+            return  { user: {email: 'user1@abcd.com', workid: '20', position: 'User'}     }
         else
             return  { user: {email: '', workid: '', position: 'n/a'}     }
     }
