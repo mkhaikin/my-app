@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import {useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {login} from '../store/action_creators/accesscall'
-import IPage from '../interfaces/page';
 import logging from '../config/logging'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
+import {useTypesSelector} from "../hooks/menuTypesSelector";
+import {ROLE} from "../interfaces/role"
 
 const LoginPage: React.FunctionComponent = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const {access, loading, error, isAuthenticated } = useTypesSelector(state=> state.access)
 
     const dispatch = useDispatch()
     const history = useNavigate()
@@ -32,9 +35,18 @@ const LoginPage: React.FunctionComponent = props => {
         //////////////////////
             
 
-        dispatch(login('me@abcd.com', '12345'))
+        //dispatch(login('me@abcd.com', '12345'))
+        dispatch(login(email, password))
         //history('/admin-dashboard')
-        ///////////////////////
+    }
+
+    function navigator(){
+        console.log("Authenticated")
+        console.log("Position: " + access?.user.position)
+       
+        if(access?.user.position === ROLE.Admin) history('/admin-dashboard')
+            else if(access?.user.position === ROLE.Menager) history('/menager-dashboard')
+                else if(access?.user.position === ROLE.User) history('/user-dashboard')
     }
 
     return (
@@ -65,7 +77,10 @@ const LoginPage: React.FunctionComponent = props => {
                         </Button>
                     </Form>
                 </div>
-
+            <div>
+                { loading ? 'Loading...' : null }
+                {isAuthenticated ? navigator() : 'Please authenticate'}
+            </div>
         </div>
     )
 }

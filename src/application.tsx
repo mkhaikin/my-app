@@ -19,8 +19,7 @@ import {PrivateRoute} from './pages/PrivateRoute';
 import { ROLE } from './interfaces/role';
 
 const Application: React.FunctionComponent<{}> = props => {
-    const [isAuth, setAuth] = useState(false)
-
+    
     useEffect(()=>{
         logging.info('Loading application.')
     }, [])
